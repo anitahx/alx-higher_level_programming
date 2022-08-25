@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+if __name__ == "__main__":
 def add_arg(argv):
     n = len(argv) - 1
     if n == 0:
