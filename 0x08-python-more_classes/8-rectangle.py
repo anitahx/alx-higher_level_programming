@@ -3,8 +3,13 @@
 
 
 class Rectangle:
+    """number of instances"""
+    number_of_instances = 0
+    """set print symbol character"""
+    print_symbol = "#"
     """doctring for init"""
     def __init__(self, width, height):
+        Rectangle.number_of_instances += 1
         self.height = height
         self.width = width
     """width getter method"""
@@ -50,5 +55,28 @@ class Rectangle:
             if i != 0:
                 string += '\n'
             for j in range(self.width):
-                string += '#'
+                """**Note to self**
+                Use instance attribute/method to change for the instance
+                and not the class.
+                The class attribute/method affects all instances"""
+                string += str(self.print_symbol)
         return string
+    """string representation"""
+    def __repr__(self):
+        string = f'Rectangle({self.width}, {self.height})'
+        return string
+    """delete object"""
+    def __del__(self):
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")
+    """returns the biggest rectangle based on the area"""
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        elif not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        if rect_1.area() >= rect_2.area():
+            return rect_1
+        elif rect_1.area() == rect_2.area():
+            return rect_2
