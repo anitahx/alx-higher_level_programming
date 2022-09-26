@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-def add_attribute(*args):
-    if "main" in str(type(args[0])):
-        setattr(args[0], args[1], args[2])
-    else:
+""" add_attribute module """
+
+
+def add_attribute(prmObject, prmName, prmValue):
+    """ add_attribute function """
+    if not hasattr(prmObject, "__dict__"):
         raise TypeError("can't add new attribute")
+    if (not hasattr(prmObject, prmName)):
+        prmObject.__setattr__(prmName, prmValue)
